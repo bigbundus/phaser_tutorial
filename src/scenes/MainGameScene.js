@@ -29,5 +29,50 @@ export default class HelloWorldScene extends Phaser.Scene
             collidingTileColor: new Phaser.Display.Color(240,50,20,255),
             faceColor: new Phaser.Display.Color(40,39,39,255)
         })
+
+        const warrior = this.add.sprite(60, 60, 'warrior', 'Warrior_Idle_1.png')
+
+        this.anims.create({
+            key: 'warrior-idle',
+            frames: this.anims.generateFrameNames(
+                'warrior', {
+                    start: 1,
+                    end: 6,
+                    prefix: 'Warrior_Idle_',
+                    suffix: '.png'
+                }),
+            repeat: -1,
+            frameRate: 8
+        })
+
+        this.anims.create({
+            key: 'warrior-run',
+            frames: this.anims.generateFrameNames(
+                'warrior', {
+                    start: 1,
+                    end: 8,
+                    prefix: 'Warrior_Run_',
+                    suffix: '.png'
+                }
+            ),
+            repeat: -1,
+            frameRate: 8
+        })
+
+        this.anims.create({
+            key: 'warrior-walk-up',
+            frames: this.anims.generateFrameNames(
+                'warrior', {
+                    start: 1,
+                    end: 4,
+                    prefix: 'walking_away_',
+                    suffix: '.png'
+                }
+            ),
+            repeat: -1,
+            frameRate: 8,
+        })
+
+        warrior.anims.play('warrior-idle')
     }
 }
