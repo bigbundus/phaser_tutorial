@@ -9,6 +9,7 @@ export default class HelloWorldScene extends Phaser.Scene
 
 	preload()
     {
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     create()
@@ -30,7 +31,7 @@ export default class HelloWorldScene extends Phaser.Scene
             faceColor: new Phaser.Display.Color(40,39,39,255)
         })
 
-        const warrior = this.add.sprite(60, 60, 'warrior', 'Warrior_Idle_1.png')
+        this.warrior = this.physics.add.sprite(60, 60, 'warrior', 'Warrior_Idle_1.png')
 
         this.anims.create({
             key: 'warrior-idle',
@@ -73,6 +74,34 @@ export default class HelloWorldScene extends Phaser.Scene
             frameRate: 8,
         })
 
-        warrior.anims.play('warrior-idle')
+        this.warrior.anims.play('warrior-idle')
+    }
+
+    update(t, dt)
+    {
+        if (!this.cursors || !this.warrior)
+        {
+            return
+        }
+
+        const speed = 100;
+
+        if (this.cursors.left.isDown)
+        {
+            this.warrior.setVelocity(-speed, 0)
+            this.warrior.anims.play('warrior-run', true)
+            this.warrior.flipX = true;
+        }
+        else if (this.cursors.right.isDown)
+        {
+            this.warrior.setVelocity(speed, 0)
+            this.warrior.anims.play('warrior-run', true)
+            this.warrior.flipX = false;
+        }
+        else
+        {
+            this.warrior.setVelocity(0,0)
+            this.warrior.anims.play('warrior-idle', true)
+        }
     }
 }
