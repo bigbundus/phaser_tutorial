@@ -84,7 +84,7 @@ export default class HelloWorldScene extends Phaser.Scene
             return
         }
 
-        const speed = 100;
+        const speed = 50;
 
         if (this.cursors.left.isDown)
         {
